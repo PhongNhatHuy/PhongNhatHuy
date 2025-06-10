@@ -1,0 +1,54 @@
+﻿<div class="container">
+    <div class="thumbnail">
+        <h4 class="tensach">@Model.TenSach</h4>
+        <img src="~/Images/Slider/@Model.AnhBia" alt="@Model.TenSach" class="img-responsive img-rounded" />
+        <div class="motasach">
+            <p>Chưa có mô tả</p>
+            <p class="ngaycapnhat">Ngày cập nhật: @Model.NgayCapNhat.ToString("dd/MM/yyyy")</p>
+            <p class="addtocard">
+                <a href="@Url.Action("AddToCart", "ShoppingCart", new { id = @Model.MaSach })" class="btn btn-primary" role="button">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    .thumbnail {
+        margin: 20px auto;
+        max-width: 600px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    .tensach {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .img-responsive {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    .motasach p {
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+
+    .ngaycapnhat {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .addtocard .btn {
+        margin-top: 10px;
+    }
+</style>

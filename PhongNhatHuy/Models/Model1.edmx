@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SachOnlineDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CHUDE">
+          <Key>
+            <PropertyRef Name="MaCD" />
+          </Key>
+          <Property Name="MaCD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenChuDe" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TaiKhoan" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DienThoai" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NgaySinh" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NHAXUATBAN">
+          <Key>
+            <PropertyRef Name="MaNXB" />
+          </Key>
+          <Property Name="MaNXB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenNXB" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SACH">
+          <Key>
+            <PropertyRef Name="MaSach" />
+          </Key>
+          <Property Name="MaSach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenSach" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="AnhBia" Type="nvarchar" MaxLength="200" />
+          <Property Name="NgayCapNhat" Type="datetime" />
+          <Property Name="MaCD" Type="int" />
+          <Property Name="MaNXB" Type="int" />
+        </EntityType>
+        <EntityType Name="ThongTinCaNhans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SoDienThoai" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="NganhHoc" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__SACH__MaCD__60A75C0F">
+          <End Role="CHUDE" Type="Self.CHUDE" Multiplicity="0..1" />
+          <End Role="SACH" Type="Self.SACH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUDE">
+              <PropertyRef Name="MaCD" />
+            </Principal>
+            <Dependent Role="SACH">
+              <PropertyRef Name="MaCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SACH__MaNXB__619B8048">
+          <End Role="NHAXUATBAN" Type="Self.NHAXUATBAN" Multiplicity="0..1" />
+          <End Role="SACH" Type="Self.SACH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHAXUATBAN">
+              <PropertyRef Name="MaNXB" />
+            </Principal>
+            <Dependent Role="SACH">
+              <PropertyRef Name="MaNXB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SachOnlineDbModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHUDE" EntityType="Self.CHUDE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHAXUATBAN" EntityType="Self.NHAXUATBAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SACH" EntityType="Self.SACH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThongTinCaNhans" EntityType="Self.ThongTinCaNhans" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__SACH__MaCD__60A75C0F" Association="Self.FK__SACH__MaCD__60A75C0F">
+            <End Role="CHUDE" EntitySet="CHUDE" />
+            <End Role="SACH" EntitySet="SACH" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SACH__MaNXB__619B8048" Association="Self.FK__SACH__MaNXB__619B8048">
+            <End Role="NHAXUATBAN" EntitySet="NHAXUATBAN" />
+            <End Role="SACH" EntitySet="SACH" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SachOnlineDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CHUDE">
+          <Key>
+            <PropertyRef Name="MaCD" />
+          </Key>
+          <Property Name="MaCD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenChuDe" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="SACH" Relationship="Self.FK__SACH__MaCD__60A75C0F" FromRole="CHUDE" ToRole="SACH" />
+        </EntityType>
+        <EntityType Name="NHAXUATBAN">
+          <Key>
+            <PropertyRef Name="MaNXB" />
+          </Key>
+          <Property Name="MaNXB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenNXB" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="SACH" Relationship="Self.FK__SACH__MaNXB__619B8048" FromRole="NHAXUATBAN" ToRole="SACH" />
+        </EntityType>
+        <EntityType Name="SACH">
+          <Key>
+            <PropertyRef Name="MaSach" />
+          </Key>
+          <Property Name="MaSach" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenSach" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AnhBia" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+          <Property Name="MaCD" Type="Int32" />
+          <Property Name="MaNXB" Type="Int32" />
+          <NavigationProperty Name="CHUDE" Relationship="Self.FK__SACH__MaCD__60A75C0F" FromRole="SACH" ToRole="CHUDE" />
+          <NavigationProperty Name="NHAXUATBAN" Relationship="Self.FK__SACH__MaNXB__619B8048" FromRole="SACH" ToRole="NHAXUATBAN" />
+        </EntityType>
+        <EntityType Name="ThongTinCaNhans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NganhHoc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__SACH__MaCD__60A75C0F">
+          <End Role="CHUDE" Type="Self.CHUDE" Multiplicity="0..1" />
+          <End Role="SACH" Type="Self.SACH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUDE">
+              <PropertyRef Name="MaCD" />
+            </Principal>
+            <Dependent Role="SACH">
+              <PropertyRef Name="MaCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SACH__MaNXB__619B8048">
+          <End Role="NHAXUATBAN" Type="Self.NHAXUATBAN" Multiplicity="0..1" />
+          <End Role="SACH" Type="Self.SACH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHAXUATBAN">
+              <PropertyRef Name="MaNXB" />
+            </Principal>
+            <Dependent Role="SACH">
+              <PropertyRef Name="MaNXB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SachOnlineDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="CHUDE" EntityType="Self.CHUDE" />
+          <EntitySet Name="NHAXUATBAN" EntityType="Self.NHAXUATBAN" />
+          <EntitySet Name="SACH" EntityType="Self.SACH" />
+          <EntitySet Name="ThongTinCaNhans" EntityType="Self.ThongTinCaNhans" />
+          <AssociationSet Name="FK__SACH__MaCD__60A75C0F" Association="Self.FK__SACH__MaCD__60A75C0F">
+            <End Role="CHUDE" EntitySet="CHUDE" />
+            <End Role="SACH" EntitySet="SACH" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SACH__MaNXB__619B8048" Association="Self.FK__SACH__MaNXB__619B8048">
+            <End Role="NHAXUATBAN" EntitySet="NHAXUATBAN" />
+            <End Role="SACH" EntitySet="SACH" />
+          </AssociationSet>
+          <EntitySet Name="KHACHHANG" EntityType="SachOnlineDbModel.KHACHHANG" />
+        </EntityContainer>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaiKhoan" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="MatKhau" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DiaChi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NgaySinh" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SachOnlineDbModelStoreContainer" CdmEntityContainer="SachOnlineDbEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="SachOnlineDbModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHUDE">
+            <EntityTypeMapping TypeName="SachOnlineDbModel.CHUDE">
+              <MappingFragment StoreEntitySet="CHUDE">
+                <ScalarProperty Name="MaCD" ColumnName="MaCD" />
+                <ScalarProperty Name="TenChuDe" ColumnName="TenChuDe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHAXUATBAN">
+            <EntityTypeMapping TypeName="SachOnlineDbModel.NHAXUATBAN">
+              <MappingFragment StoreEntitySet="NHAXUATBAN">
+                <ScalarProperty Name="MaNXB" ColumnName="MaNXB" />
+                <ScalarProperty Name="TenNXB" ColumnName="TenNXB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SACH">
+            <EntityTypeMapping TypeName="SachOnlineDbModel.SACH">
+              <MappingFragment StoreEntitySet="SACH">
+                <ScalarProperty Name="MaSach" ColumnName="MaSach" />
+                <ScalarProperty Name="TenSach" ColumnName="TenSach" />
+                <ScalarProperty Name="AnhBia" ColumnName="AnhBia" />
+                <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+                <ScalarProperty Name="MaCD" ColumnName="MaCD" />
+                <ScalarProperty Name="MaNXB" ColumnName="MaNXB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThongTinCaNhans">
+            <EntityTypeMapping TypeName="SachOnlineDbModel.ThongTinCaNhans">
+              <MappingFragment StoreEntitySet="ThongTinCaNhans">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="NganhHoc" ColumnName="NganhHoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHACHHANG">
+            <EntityTypeMapping TypeName="SachOnlineDbModel.KHACHHANG">
+              <MappingFragment StoreEntitySet="KHACHHANG">
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="90ce45c9aab845fca86491191967516c" Name="Diagram1">
+        <EntityTypeShape EntityType="SachOnlineDbModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachOnlineDbModel.CHUDE" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachOnlineDbModel.NHAXUATBAN" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachOnlineDbModel.SACH" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachOnlineDbModel.ThongTinCaNhans" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachOnlineDbModel.KHACHHANG" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SachOnlineDbModel.FK__SACH__MaCD__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="SachOnlineDbModel.FK__SACH__MaNXB__619B8048" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

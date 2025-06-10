@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 50px;">
+        <h2>Đăng Nhập</h2>
+        @if (!string.IsNullOrEmpty(ViewBag.ThongBao))
+        {
+            <p style="color: red;">@ViewBag.ThongBao</p>
+        }
+        @using (Html.BeginForm("DangNhap", "SachOnline", FormMethod.Post))
+        {
+            <table align="center">
+                <tr>
+                    <td>Tên đăng nhập:</td>
+                    <td>@Html.TextBox("TenDN") @Html.ValidationMessage("err1", (string)ViewData["err1"])</td>
+                </tr>
+                <tr>
+                    <td>Mật khẩu:</td>
+                    <td>@Html.Password("MatKhau") @Html.ValidationMessage("err2", (string)ViewData["err2"])</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Đăng Nhập" />
+                        <input type="button" value="Quay Lại" onclick="window.location.href='@Url.Action("Index", "SachOnline")'" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>
+
